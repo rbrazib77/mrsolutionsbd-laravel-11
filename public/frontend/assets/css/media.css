@@ -1,0 +1,110 @@
+@media only screen and (min-width: 992px) and (max-width: 1350px) {
+    .mobile-menu-offcanvas-toggler {
+        display: block;
+    }
+    .mobile-menu-modal .offcanvas-dialog {
+        width: 400px;
+    }
+    .mobile-menu-offcanvas-toggler {
+        top: 6%;
+    }
+    .header-area.is-sticky .mobile-menu-offcanvas-toggler {
+        top: 26px;
+    }
+    .header-right {
+        display: none;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .mobile-menu-offcanvas-toggler {
+        display: block;
+    }
+    .mobile-menu-modal .offcanvas-dialog {
+        width: 400px;
+    }
+    .mobile-menu-offcanvas-toggler {
+        top: 6%;
+    }
+    .header-area.is-sticky .mobile-menu-offcanvas-toggler {
+        top: 26px;
+    }
+    .header-right {
+        display: none;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .topbar-area {
+        display: none;
+    }
+    .container {
+        padding: 0 5% !important;
+    }
+
+    .topbar-update-notice {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        /* width: calc(100% - 80px); */
+    }
+
+    .topbar-update-notice-title {
+        z-index: 222;
+    }
+
+    .topbar-update-notice-slider {
+        display: flex;
+        flex-wrap: nowrap;
+        width: max-content;
+        animation: marquee 20s linear infinite;
+    }
+
+    .topbar-update-notice-single {
+        flex: 0 0 auto;
+        margin-right: 20px !important;
+        white-space: nowrap;
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+    .mobile-menu-offcanvas-toggler {
+        display: block;
+    }
+
+    .header-right {
+        display: none;
+    }
+    .header-logo img {
+        height: 40px;
+    }
+    .header-area.is-sticky .header-inner {
+        padding: 18px 0px;
+    }
+
+    .breadcrumbs-content-title {
+        font-size: 24px;
+    }
+    .breadcrumbs-menu li a {
+        font-size: 14px;
+    }
+    .breadcrumbs-area {
+        padding: 48px 0px;
+    }
+
+    .theme-btn {
+        padding: 11px 17px;
+        font-size: 15px;
+        margin-right: 12px;
+    }
+    .theme-btn i {
+        font-size: 18px;
+        position: relative;
+        top: 2px;
+    }
+    
+}
