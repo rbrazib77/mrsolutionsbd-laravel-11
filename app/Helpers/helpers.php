@@ -39,3 +39,17 @@ if (!function_exists('upload_setting_image')) {
         }
     }
 }
+
+if (!function_exists('upload_socialMedia_icon')) {
+    function upload_socialMedia_icon($request, $inputName)
+    {
+        if ($request->hasFile($inputName)) {
+            $file = $request->file($inputName);
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('upload/social_media/'), $filename);
+            return 'upload/social_media/' . $filename;
+        }
+
+        return null; // কোন file না থাকলে null
+    }
+}

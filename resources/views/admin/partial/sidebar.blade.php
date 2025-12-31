@@ -91,10 +91,10 @@
                      <div class="collapse" id="sidebarSocileMedia">
                          <ul class="nav-second-level">
                              <li>
-                                 <a href="{{ route('admin.social.media.link.index') }}" class="tp-link">Index</a>
+                                 <a href="{{ route('admin.social.media.index') }}" class="tp-link">Index</a>
                              </li>
                              <li>
-                                 <a href="{{ route('admin.social.media.link.create') }}" class="tp-link">Create</a>
+                                 <a href="{{ route('admin.social.media.create') }}" class="tp-link">Create</a>
                              </li>
                          </ul>
                      </div>

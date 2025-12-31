@@ -5,7 +5,7 @@
     $totalUser = App\Models\User::all()->count();
     $message = App\Models\ContactMessage::all()->count();
     $page = App\Models\SeoSetting::all()->count();
-    $socialMedia = App\Models\SocialMediaLink::where('status', 1)->count();
+    $socialMedia = App\Models\SocialMedia::where('status', 1)->count();
     $banner = App\Models\BannerSection::where('status', 1)->count();
     $service = App\Models\OurServiceSection::where('status', 1)->count();
     $clients = App\Models\Client::where('status', 1)->count();
@@ -82,7 +82,7 @@
                         </div>
 
                         <div class="col-md-6 col-xl-3">
-                            <a href="{{ route('admin.social.media.link.index') }}">
+                            <a href="{{ route('admin.social.media.index') }}">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="text-center text-uppercase">

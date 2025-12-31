@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Admin\{BannerSectionController,OurServiceSectionController,SettingController,SocialMediaLinkController,VisitorController,AdminLoginHistoryController,ContactMessageController,WorkingPhotoCategoryController,WorkingPhotoController,WorkingVideoController,ClientController,AboutSectionController,WhyChooseUsController,OurMissionController,OurVisionController,ActivityForCustomerController,FaqController,SeoSettingController,PrivacyPolicyController,MenuController};
+use App\Http\Controllers\Admin\{BannerSectionController,OurServiceSectionController,SettingController,SocialMediaController,VisitorController,AdminLoginHistoryController,ContactMessageController,WorkingPhotoCategoryController,WorkingPhotoController,WorkingVideoController,ClientController,AboutSectionController,WhyChooseUsController,OurMissionController,OurVisionController,ActivityForCustomerController,FaqController,SeoSettingController,PrivacyPolicyController,MenuController};
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
@@ -91,13 +91,13 @@ Route::prefix('admin/setting')->middleware(['auth'])->group(function () {
 });
 
 //Social Media  Routes
-Route::prefix('admin/social/media/link')->middleware(['auth'])->group(function () {
-    Route::get('index', [SocialMediaLinkController::class, 'SocialMediaLinkIndex'])->name('admin.social.media.link.index');
-    Route::get('create', [SocialMediaLinkController::class, 'SocialMediaLinkCreate'])->name('admin.social.media.link.create');
-    Route::post('store', [SocialMediaLinkController::class, 'SocialMediaLinkStore'])->name('admin.social.media.link.store');
-     Route::post('update/{id}', [SocialMediaLinkController::class, 'SocialMediaLinkUpdate'])->name('admin.social.media.link.update');
-    Route::get('destroy/{id}', [SocialMediaLinkController::class, 'SocialMediaLinkDelete'])->name('admin.social.media.link.destroy');
-    Route::get('active-deactive/{id}', [SocialMediaLinkController::class, 'toggleSocialMediaLink'])->name('admin.social.media.link.active.deactive');
+Route::prefix('admin/social/media')->middleware(['auth'])->group(function () {
+    Route::get('index', [SocialMediaController::class, 'SocialMediaIndex'])->name('admin.social.media.index');
+    Route::get('create', [SocialMediaController::class, 'SocialMediaCreate'])->name('admin.social.media.create');
+    Route::post('store', [SocialMediaController::class, 'SocialMediaStore'])->name('admin.social.media.store');
+     Route::post('update/{id}', [SocialMediaController::class, 'SocialMediaUpdate'])->name('admin.social.media.update');
+    Route::get('destroy/{id}', [SocialMediaController::class, 'SocialMediaDelete'])->name('admin.social.media.destroy');
+    Route::get('active-deactive/{id}', [SocialMediaController::class, 'toggleSocialMedia'])->name('admin.social.media.active.deactive');
 });
 
 //Visitors Routes
