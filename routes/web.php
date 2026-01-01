@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Admin\{BannerSectionController,OurServiceSectionController,SettingController,SocialMediaController,VisitorController,AdminLoginHistoryController,ContactMessageController,WorkingPhotoCategoryController,WorkingPhotoController,WorkingVideoController,ClientController,AboutSectionController,WhyChooseUsController,OurMissionController,OurVisionController,ActivityForCustomerController,FaqController,SeoSettingController,PrivacyPolicyController,MenuController};
+use App\Http\Controllers\Admin\{BannerSectionController,OurServiceSectionController,SettingController,SocialMediaController,VisitorController,AdminLoginHistoryController,ContactMessageController,WorkingPhotoCategoryController,WorkingPhotoController,WorkingVideoController,ClientController,AboutSectionController,WhyChooseUsController,OurMissionController,OurVisionController,ActivityForCustomerController,FaqController,SeoSettingController,PrivacyPolicyController,MenuController,PageSectionController};
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
@@ -44,8 +44,6 @@ Route::prefix('admin')->name('admin.')->middleware('guest')->group(function () {
     Route::post('/solutions/sk/login', [AuthenticatedSessionController::class, 'store'])->name('login.store');
     Route::get('/sk/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
     Route::post('/sk/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
-
-
 });
 
 //Admin Logout Route
@@ -62,7 +60,7 @@ Route::prefix('admin')->middleware(['auth','verified'])->group(function () {
     Route::get('/users/destroy/{id}', [AdminController::class, 'destroy'])->name('user.destroy');
 });
 
-//Menus Routes
+//Menu Routes
 Route::prefix('admin/menu')->middleware(['auth'])->group(function () {
     Route::get('index', [MenuController::class, 'MenuIndex'])->name('admin.menu.index');
     Route::get('create', [MenuController::class, 'MenuCreate'])->name('admin.menu.create');
@@ -73,15 +71,22 @@ Route::prefix('admin/menu')->middleware(['auth'])->group(function () {
 });
 
 
-//Banner Section Routes
-Route::prefix('admin/banner')->middleware(['auth'])->group(function () {
-    Route::get('index', [BannerSectionController::class, 'BannerIndex'])->name('admin.banner.index');
-    Route::get('create', [BannerSectionController::class, 'BannerCreate'])->name('admin.banner.create');
-    Route::post('store', [BannerSectionController::class, 'BannerStore'])->name('admin.banner.store');
-    Route::post('update/{id}', [BannerSectionController::class, 'BannerUpdate'])->name('admin.banner.update');
-    Route::get('destroy/{id}', [BannerSectionController::class, 'BannerDelete'])->name('admin.banner.destroy');
-    Route::get('active-deactive/{id}', [BannerSectionController::class, 'toggleBannerSection'])->name('admin.banner.active.deactive');
+//Page Section Routes
+Route::prefix('admin/page/section')->middleware(['auth'])->group(function () {
+    // List all pages
+    Route::get('/index', [PageSectionController::class, 'index'])->name('admin.pages.index');
+
+    // Create new page + sections
+    Route::get('/create', [PageSectionController::class, 'create'])->name('admin.pages.create');
+    Route::post('/store', [PageSectionController::class, 'store'])->name('admin.pages.store');
+
+    // Edit page sections
+    Route::get('/pages/{pageName}/edit', [PageSectionController::class, 'edit'])->name('pages.edit');
+    Route::put('/pages/{pageName}', [PageSectionController::class, 'update'])->name('pages.update');
 });
+
+
+
 
 
 //Website Setting  Routes
@@ -89,6 +94,7 @@ Route::prefix('admin/setting')->middleware(['auth'])->group(function () {
     Route::get('website/index', [SettingController::class, 'WebsiteIndex'])->name('admin.website.index');
     Route::post('website/update/{id}', [SettingController::class, 'WebsiteUpdate'])->name('admin.website.update');
 });
+
 
 //Social Media  Routes
 Route::prefix('admin/social/media')->middleware(['auth'])->group(function () {
@@ -98,6 +104,16 @@ Route::prefix('admin/social/media')->middleware(['auth'])->group(function () {
      Route::post('update/{id}', [SocialMediaController::class, 'SocialMediaUpdate'])->name('admin.social.media.update');
     Route::get('destroy/{id}', [SocialMediaController::class, 'SocialMediaDelete'])->name('admin.social.media.destroy');
     Route::get('active-deactive/{id}', [SocialMediaController::class, 'toggleSocialMedia'])->name('admin.social.media.active.deactive');
+});
+
+//Banner Section Routes
+Route::prefix('admin/banner')->middleware(['auth'])->group(function () {
+    Route::get('index', [BannerSectionController::class, 'BannerIndex'])->name('admin.banner.index');
+    Route::get('create', [BannerSectionController::class, 'BannerCreate'])->name('admin.banner.create');
+    Route::post('store', [BannerSectionController::class, 'BannerStore'])->name('admin.banner.store');
+    Route::post('update/{id}', [BannerSectionController::class, 'BannerUpdate'])->name('admin.banner.update');
+    Route::get('destroy/{id}', [BannerSectionController::class, 'BannerDelete'])->name('admin.banner.destroy');
+    Route::get('active-deactive/{id}', [BannerSectionController::class, 'toggleBannerSection'])->name('admin.banner.active.deactive');
 });
 
 //Visitors Routes

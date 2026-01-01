@@ -101,7 +101,7 @@
                  </li>
                  <li>
                      <a href="#sidebarMenu" data-bs-toggle="collapse">
-                         <i data-feather="film"></i>
+                         <i data-feather="menu"></i>
                          <span>Menu</span>
                          <span class="menu-arrow"></span>
                      </a>
@@ -112,6 +112,23 @@
                              </li>
                              <li>
                                  <a href="{{ route('admin.menu.create') }}" class="tp-link">Create</a>
+                             </li>
+                         </ul>
+                     </div>
+                 </li>
+                  <li>
+                     <a href="#sidebarPageSection" data-bs-toggle="collapse">
+                         <i data-feather="menu"></i>
+                         <span>Page Section</span>
+                         <span class="menu-arrow"></span>
+                     </a>
+                     <div class="collapse" id="sidebarPageSection">
+                         <ul class="nav-second-level">
+                             <li>
+                                 <a href="{{ route('admin.pages.index') }}" class="tp-link">Index</a>
+                             </li>
+                             <li>
+                                 <a href="{{ route('admin.pages.create') }}" class="tp-link">Create</a>
                              </li>
                          </ul>
                      </div>
@@ -130,6 +147,20 @@
                              </li>
                              <li>
                                  <a href="{{ route('admin.banner.create') }}" class="tp-link">Create</a>
+                             </li>
+                         </ul>
+                     </div>
+                 </li>
+                   <li>
+                     <a href="#sidebarAboutSection" data-bs-toggle="collapse">
+                         <i data-feather="file-text"></i>
+                         <span>About Section</span>
+                         <span class="menu-arrow"></span>
+                     </a>
+                     <div class="collapse" id="sidebarAboutSection">
+                         <ul class="nav-second-level">
+                             <li>
+                                 <a href="{{ route('admin.about-section.index') }}" class="tp-link">Index</a>
                              </li>
                          </ul>
                      </div>
@@ -208,20 +239,7 @@
                      </div>
                  </li>
 
-                 <li>
-                     <a href="#sidebarAboutSection" data-bs-toggle="collapse">
-                         <i data-feather="file-text"></i>
-                         <span>About Section</span>
-                         <span class="menu-arrow"></span>
-                     </a>
-                     <div class="collapse" id="sidebarAboutSection">
-                         <ul class="nav-second-level">
-                             <li>
-                                 <a href="{{ route('admin.about-section.index') }}" class="tp-link">Index</a>
-                             </li>
-                         </ul>
-                     </div>
-                 </li>
+               
 
                  <li>
                      <a href="#sidebarWhyChooseUsSection" data-bs-toggle="collapse">

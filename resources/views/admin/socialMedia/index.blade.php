@@ -78,7 +78,7 @@
                                             <div class="modal-dialog modal-xl">
                                                 <div class="modal-content">
                                                     <form action="{{ route('admin.social.media.update', $item->id) }}"
-                                                        method="POST">
+                                                        method="POST"  enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="modal-header">
                                                             <h5 class="modal-title"
@@ -95,10 +95,10 @@
                                                             <div class="mb-3">
                                                                 <label for="name{{ $item->id }}"
                                                                     class="form-label">Name</label>
-                                                                <input type="text" name="platform"
+                                                                <input type="text" name="name"
                                                                     id="name{{ $item->id }}"
                                                                     class="form-control @error('name') is-invalid @enderror"
-                                                                    value="{{ old('platform', $item->name) }}"
+                                                                    value="{{ old('name', $item->name) }}"
                                                                     placeholder="Name">
                                                                 @error('name')
                                                                     <span class="text-danger"
@@ -108,55 +108,22 @@
 
                                                             {{-- Icon Class --}}
                                                             <div class="mb-3">
-                                                                <label for="icon_class{{ $item->id }}"
-                                                                    class="form-label">Icon</label>
-                                                                <select name="icon_class" class="form-select"
-                                                                    id="iconPicker{{ $item->id }}"
-                                                                    onchange="updateIconPreview{{ $item->id }}()">
-                                                                    <option value="">Choose...</option>
-                                                                    <option value="fa-solid fa-envelope"
-                                                                        {{ old('icon_class', $item->icon_class) == 'fa-solid fa-envelope' ? 'selected' : '' }}>
-                                                                        Email</option>
-                                                                    <option value="fa-brands fa-square-whatsapp"
-                                                                        {{ old('icon_class', $item->icon_class) == 'fa-brands fa-square-whatsapp' ? 'selected' : '' }}>
-                                                                        WhatsApp</option>
-                                                                    <option value="fa-brands fa-square-facebook"
-                                                                        {{ old('icon_class', $item->icon_class) == 'fa-brands fa-square-facebook' ? 'selected' : '' }}>
-                                                                        Facebook</option>
-                                                                    <option value="fab fa-twitter"
-                                                                        {{ old('icon_class', $item->icon_class) == 'fab fa-twitter' ? 'selected' : '' }}>
-                                                                        Twitter</option>
-                                                                    <option value="fab fa-instagram"
-                                                                        {{ old('icon_class', $item->icon_class) == 'fab fa-instagram' ? 'selected' : '' }}>
-                                                                        Instagram</option>
-                                                                    <option value="fab fa-linkedin"
-                                                                        {{ old('icon_class', $item->icon_class) == 'fab fa-linkedin' ? 'selected' : '' }}>
-                                                                        LinkedIn</option>
-                                                                    <option value="fab fa-youtube"
-                                                                        {{ old('icon_class', $item->icon_class) == 'fab fa-youtube' ? 'selected' : '' }}>
-                                                                        YouTube</option>
-                                                                    <option value="fab fa-pinterest"
-                                                                        {{ old('icon_class', $item->icon_class) == 'fab fa-pinterest' ? 'selected' : '' }}>
-                                                                        Pinterest</option>
-                                                                    <option value="fab fa-tiktok"
-                                                                        {{ old('icon_class', $item->icon_class) == 'fab fa-tiktok' ? 'selected' : '' }}>
-                                                                        TikTok</option>
-                                                                </select>
+                                                                <label for="icon" class="form-label">Icon<small
+                                                                        class="text-danger">
+                                                                        (Recommended Size:30x30px)
+                                                                    </small></label>
+                                                                <input name="icon" class="form-control icon"
+                                                                    type="file">
+                                                                @error('icon')
+                                                                    <span class="text-danger"
+                                                                        style="font-size: 14px;">{{ $message }}</span>
+                                                                @enderror
                                                             </div>
-
-                                                            {{-- Icon Preview --}}
-                                                            <div class="form-group col-md-2">
-                                                                <label class="form-label">Icon Preview</label>
-                                                                <div class="border rounded d-flex align-items-center justify-content-center bg-light"
-                                                                    style="height: 60px; width: 60px;">
-                                                                    <span id="iconPreview{{ $item->id }}"
-                                                                        class="text-dark" style="font-size: 28px;">
-                                                                        <i
-                                                                            class="{{ old('icon_class', $item->icon_class) }}"></i>
-                                                                    </span>
-                                                                </div>
+                                                            <div class="mb-3">
+                                                                <img src="{{ asset($item->icon) }}" alt="Main Logo"
+                                                                    class="avatar-xxl img-thumbnail showIcon"
+                                                                    style="width:65px;height:65px;">
                                                             </div>
-
                                                             {{-- URL --}}
                                                             <div class="mb-4 mt-3">
                                                                 <label for="url{{ $item->id }}"
@@ -211,12 +178,6 @@
                                         </div>
 
                                         {{-- Icon Preview JS --}}
-                                        <script>
-                                            function updateIconPreview{{ $item->id }}() {
-                                                var iconClass = document.getElementById('iconPicker{{ $item->id }}').value;
-                                                document.getElementById('iconPreview{{ $item->id }}').innerHTML = `<i class="${iconClass}"></i>`;
-                                            }
-                                        </script>
                                     @endforeach
 
                                 </tbody>
@@ -292,6 +253,18 @@
                     }
                 });
             }
+        });
+    </script>
+    <script>
+        $(document).on('change', '.icon', function() {
+            let reader = new FileReader();
+            let previewImg = $(this).closest('.mb-3').next('.mb-3').find('.showIcon');
+
+            reader.onload = function(e) {
+                previewImg.attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(this.files[0]);
         });
     </script>
 @endpush

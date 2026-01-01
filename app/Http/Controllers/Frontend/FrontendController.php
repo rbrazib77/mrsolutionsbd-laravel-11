@@ -26,7 +26,8 @@ class FrontendController extends Controller
 {
     public function index(){
         $pageName = 'home';
-        $banner = BannerSection::where('status', 1)->orderBy('order', 'asc')->get();
+        $banners = BannerSection::where('status', 1)->orderBy('order', 'asc')->get();
+        $about =AboutSection::where('status', 1)->first();
         $setting =WebsiteSetting::first();
         $ourServices=OurServiceSection::where('status', 1)->limit(6)->orderBy('sort_order')->get();
         $totalServices = OurServiceSection::where('status', 1)->count();
@@ -34,7 +35,7 @@ class FrontendController extends Controller
         $workingPhoto=WorkingPhoto::where('status', true)->orderBy('sort_order')->get();
         $videos=WorkingVideo::where('status', 1)->orderBy('sort_order')->get();
         $clients = Client::where('status', 1)->orderBy('sort_order', 'asc')->get();
-         return view("frontend.index",compact('banner','workingPhotoCategory','workingPhoto','setting','ourServices','totalServices','videos','clients','pageName'));
+         return view("frontend.index",compact('banners','about','workingPhotoCategory','workingPhoto','setting','ourServices','totalServices','videos','clients','pageName'));
     }
 
     public function about(){

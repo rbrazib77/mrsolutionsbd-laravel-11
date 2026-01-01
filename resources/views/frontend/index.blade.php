@@ -5,62 +5,58 @@
         <section class="hero-section">
             <div class="container">
                 <div class="hero-slider owl-carousel owl-theme">
-                    <div class="item" style="background-image: url('{{ asset('frontend/assets/images/banner-3.png') }}')">
-                        <div class="hero-slider-content align-self-end"></div>
-                    </div>
-
-                    <div class="item" style="background-image: url('{{ asset('frontend/assets/images/banner-4.png') }}')">
-                        <div class="hero-slider-content align-self-end"></div>
-                    </div>
-
-                    <div class="item" style="background-image: url('{{ asset('frontend/assets/images/banner-5.png') }}')">
-                        <div class="hero-slider-content align-self-end"></div>
-                    </div>
+                    @foreach ($banners as $banner)
+                        <div class="item" style="background-image: url('{{ asset('upload/banners/' . $banner->image) }}')">
+                            <div class="hero-slider-content align-self-end"></div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </section>
         <!--==============Hero Slider Section End===================-->
 
         <!--==============About Section Start======================-->
-        <section class="about-section">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-7 col-md-12 about-content">
-                        <h1 class="about-title" data-aos="fade-right">
-                            MR SOLUTIONS-এ আপনাকে স্বাগতম
-                        </h1>
-                        <p class="about-text">
-                            MR SOLUTIONS একটি প্রফেশনাল মাল্টিপল সার্ভিস কোম্পানি, যা আইটি
-                            সার্ভিস, ওয়েব ডেভেলপমেন্ট, অ্যাপ ডেভেলপমেন্ট, প্রিন্টিং সার্ভিস,
-                            কর্পোরেট গিফট আইটেম এবং ইভেন্ট অ্যাক্টিভেশন সার্ভিস প্রদান করে।
-                            আমরা ব্যক্তি ও কর্পোরেট ক্লায়েন্টদের জন্য আধুনিক, কার্যকর এবং
-                            নির্ভরযোগ্য সমাধান দিয়ে থাকি। আমাদের লক্ষ্য হলো ক্লায়েন্টের
-                            ব্যবসাকে ডিজিটাল ও ক্রিয়েটিভভাবে এগিয়ে নেওয়া। দক্ষ টিম,
-                            পরিকল্পিত কাজের ধারা এবং সময়নিষ্ঠ ডেলিভারি এবং একটি বিশ্বাসযোগ্য
-                            সার্ভিস ব্র্যান্ড হিসেবে পরিচিতি অর্জন করা। আপনি যদি একটি
-                            নির্ভরযোগ্য আইটি ও মাল্টিপল সার্ভিস পার্টনার খুঁজে থাকেন, MR
-                            SOLUTIONS আপনার সঠিক পছন্দ।
-                        </p>
-                        <!-- <a href="#" class="btn download-button">Download Company Profile</a> -->
-                    </div>
-                    <div class="col-lg-5 col-md-12 mt-md-4 mt-lg-0">
-                        <div class="video-container">
-                            <div>
-                                <img src="{{ asset('frontend/assets/images/about.jpeg') }}" alt="" />
-                            </div>
-                        </div>
+
+
+@if($about)
+<section class="about-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7 col-md-12 about-content">
+                <h1 class="about-title" data-aos="fade-right">
+                    {{ $about->title }}
+                </h1>
+                <p class="about-text">
+                    {{ $about->description }}
+                </p>
+                <!-- <a href="#" class="btn download-button">Download Company Profile</a> -->
+            </div>
+            <div class="col-lg-5 col-md-12 mt-md-4 mt-lg-0">
+                <div class="video-container">
+                    <div>
+                        <img src="{{ asset('upload/abouts/' . ($about->image ?? 'no_image.jpg')) }}" alt="About Image" />
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+@endif
+
         <!--================About Section End=====================-->
+
+        @php
+$sections = \App\Models\PageSectionTitle::where('page_name', 'home')->get()->keyBy('section_name');
+@endphp
+
+
 
         <!--==============Service Section Start======================-->
         <section class="service">
             <div class="container">
                 <div class="row">
                     <h4 class="section-title" data-aos="fade-up" data-aos-duration="800">
-                        Services WE PROVIDE
+                        {{ $sections['services']->title ?? 'Default Services Title' }}
                     </h4>
                     <div class="col-md-4 mb-4">
                         <div
@@ -242,7 +238,7 @@
         <section class="team">
             <div class="text-center">
                 <h4 class="section-title team-title" data-aos="fade-up" data-aos-duration="800">
-                    Meet Our Team
+                   {{ $sections['team']->title ?? ''}}
                 </h4>
             </div>
             <div class="container">
@@ -336,9 +332,9 @@
                                 <div class="team-owner-name">Razib Hossain</div>
                                 <div class="team-owner-role">Front-End-Developer</div>
                                 <!-- <div class="team-owner-info">
-                      <strong>E-mail:</strong>
-                      <a href="">razib.web63@gmail.com</a>
-                    </div> -->
+                          <strong>E-mail:</strong>
+                          <a href="">razib.web63@gmail.com</a>
+                        </div> -->
                             </div>
                         </div>
                     </div>
@@ -360,7 +356,7 @@
         <!--==============Projects Section Start======================-->
         <section class="projects">
             <div class="container text-center">
-                <h4 class="section-title">Working projects</h4>
+                <h4 class="section-title">{{ $sections['working projects']->title ?? 'Default Services Title' }}</h4> 
                 <div class="row">
                     <!-- Project Card -->
                     <div class="col-12 col-md-6 col-lg-3 mb-4">
@@ -426,7 +422,7 @@
         <!--==============Clients Section Start======================-->
         <section class="clients" data-aos="fade-up" data-aos-duration="1500">
             <div class="container">
-                <h4 class="section-title">Our Clients List</h4>
+                <h4 class="section-title">{{ $sections['clients']->title ?? ''}}</h4>
                 <div class="row">
                     <!-- Single logo -->
                     <div class="col-6 col-md-4 col-lg-2 mb-4">

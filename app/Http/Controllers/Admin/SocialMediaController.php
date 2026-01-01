@@ -18,62 +18,64 @@ class SocialMediaController extends Controller
     }
 
     public function SocialMediaStore(Request $request){
-    $request->validate([
-        'name'   => 'required|string|max:255',
-        'icon'   => 'required',
-        'url'    => 'required|url',
-        'status' => 'required|boolean',
-        'order'  => 'required|integer|unique:social_media,order',
-    ]);
-
-    $iconPath = upload_socialMedia_icon($request, 'icon');
-
-    SocialMedia::create([
-        'name'   => $request->name,
-        'icon'   => $iconPath,
-        'url'    => $request->url,
-        'status' => $request->status,
-        'order'  => $request->order,
-    ]);
-
-    $notification = array(
-            'message' => 'Social media created successfully',
-            'alert-type' => 'success'
-        );
-
+        $request->validate([
+            'name'   => 'required|string|max:255',
+            'icon'   => 'required',
+            'url'    => 'required|url',
+            'status' => 'required|boolean',
+            'order'  => 'required|integer|unique:social_media,order',
+        ]);
+        $iconPath = upload_socialMedia_icon($request, 'icon');
+        SocialMedia::create([
+            'name'   => $request->name,
+            'icon'   => $iconPath,
+            'url'    => $request->url,
+            'status' => $request->status,
+            'order'  => $request->order,
+        ]);
+        $notification = array(
+                'message' => 'Social media created successfully',
+                'alert-type' => 'success'
+            );
         return redirect()->back()->with($notification);
-}
-
+    }
 
     public function SocialMediaUpdate(Request $request, $id){
-    $request->validate([
-        'name'    => 'required|string|max:255',
-        'icon'  => 'required|string|max:255',
-        'url'         => 'required|url',
-        'status'      => 'required|boolean',
-        'order'       => 'required|integer|unique:social_media,order,' . $id,
-    ]);
+        $socialMedia = SocialMedia::findOrFail($id);
+        $request->validate([
+            'name'   => 'required|string|max:255',
+            'icon'   => 'nullable', // update এ optional
+            'url'    => 'required|url',
+            'status' => 'required|boolean',
+            'order'  => 'required|integer|unique:social_media,order,' . $id,
+        ]);
 
-    $socialLink = SocialMedia::findOrFail($id);
+        $iconPath = $socialMedia->icon;
 
-    $socialLink->update([
-        'name'   => $request->name,
-        'icon' => $request->icon,
-        'url'        => $request->url,
-        'status'     => $request->status,
-        'order'      => $request->order ?? 0,
-    ]);
+        if ($request->hasFile('icon')) {
+            // Old image delete
+            if ($socialMedia->icon && File::exists(public_path($socialMedia->icon))) {
+                File::delete(public_path($socialMedia->icon));
+            }
+            // new image upload
+            $iconPath = upload_socialMedia_icon($request, 'icon');
+        }
+        $socialMedia->update([
+            'name'   => $request->name,
+            'icon'   => $iconPath,
+            'url'    => $request->url,
+            'status' => $request->status,
+            'order'  => $request->order,
+        ]);
 
-    $notification = [
-        'message'    => 'Social media updated successfully',
-        'alert-type' => 'success'
-    ];
+        $notification = [
+                'message' => 'Social media updated successfully',
+                'alert-type' => 'success'
+            ];
+            return redirect()->back()->with($notification);
+    }
 
-    return redirect()->back()->with($notification);
-}
-
-
-    public function SocialMediaDelete($id){
+     public function SocialMediaDelete($id){
         $socialMedia = SocialMedia::findOrFail($id);
         if ($socialMedia->icon && File::exists(public_path($socialMedia->icon))) {
             File::delete(public_path($socialMedia->icon));

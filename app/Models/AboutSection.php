@@ -6,6 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class AboutSection extends Model
 {
-    protected $fillable = ['small_title','title','description','top_image','bottom_left_image','bottom_right_image','status',
-    ];
+    protected $fillable = ['title','description','image','status'];
 }

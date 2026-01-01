@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('about_sections', function (Blueprint $table) {
+        Schema::create('page_section_titles', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->text('description')->nullable();
-            $table->string('image')->nullable();
-            $table->boolean('status')->default(true);
+             $table->string('page_name');        // উদাহরণ: home, about, contact
+    $table->string('section_name');     // উদাহরণ: hero, services, team
+    $table->string('title')->nullable(); // section title
+    $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('about_sections');
+        Schema::dropIfExists('page_section_titles');
     }
 };

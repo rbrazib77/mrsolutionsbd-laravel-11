@@ -13,16 +13,13 @@ class AboutSectionSeeder extends Seeder
      */
     public function run(): void
     {
-       AboutSection::updateOrCreate(
+        AboutSection::updateOrCreate(
         ['id' => 1],
         [
-            'small_title'        => 'About SK Solutions!',
-            'title'              => 'What is SK Solutions',
-            'description'        => 'SK Solutions Event Management is a full-service event planning company specializing  in delivering creative, customized, and seamless event experiences. From corporate gatherings and weddings to concerts and brand activations, we handle every detail with precision and passion to make your vision a reality.',
-            'top_image'          => 'top_default.jpg',
-            'bottom_left_image'  => 'bottom_left_default.jpg',
-            'bottom_right_image' => 'bottom_right_default.jpg',
-            'status'             => true,
+        'title' => 'MR SOLUTIONS-এ আপনাকে স্বাগতম',
+        'description' => 'MR SOLUTIONS একটি প্রফেশনাল মাল্টিপল সার্ভিস কোম্পানি, যা আইটি সার্ভিস, ওয়েব ডেভেলপমেন্ট, অ্যাপ ডেভেলপমেন্ট, প্রিন্টিং সার্ভিস, কর্পোরেট গিফট আইটেম এবং ইভেন্ট অ্যাক্টিভেশন সার্ভিস প্রদান করে। আমরা ব্যক্তি ও কর্পোরেট ক্লায়েন্টদের জন্য আধুনিক, কার্যকর এবং নির্ভরযোগ্য সমাধান দিয়ে থাকি। আমাদের লক্ষ্য হলো ক্লায়েন্টের ব্যবসাকে ডিজিটাল ও ক্রিয়েটিভভাবে এগিয়ে নেওয়া। দক্ষ টিম, পরিকল্পিত কাজের ধারা এবং সময়নিষ্ঠ ডেলিভারি এবং একটি বিশ্বাসযোগ্য সার্ভিস ব্র্যান্ড হিসেবে পরিচিতি অর্জন করা। আপনি যদি একটি নির্ভরযোগ্য আইটি ও মাল্টিপল সার্ভিস পার্টনার খুঁজে থাকেন, MR SOLUTIONS আপনার সঠিক পছন্দ।',
+        'image' => 'default.jpg',
+        'status' => true,
         ]);
     }
 }
